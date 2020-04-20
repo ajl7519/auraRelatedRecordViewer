@@ -1,5 +1,5 @@
 ({
-    getData : function(component, event) {
+    getRelatedRecordView : function(component, event) {
         let relatedRecordId = null;
         let action = component.get("c.getRelatedRecordId");
         action.setParams({
@@ -12,10 +12,9 @@
                 relatedRecordId = response.getReturnValue();
                 this.createRecordView(component, relatedRecordId);
             } else if (state === "INCOMPLETE") {
-                // do something
+                component.set("v.invalidRelatedRecordMsg", "No response from server or client is offline.");
             } else if (state === "ERROR") {
-                let errors = response.getError();
-                this.handleErrors(errors);
+                this.handleErrors(response.getError(), "Unknown error.");
             }        
         });
         $A.enqueueAction(action);
@@ -39,22 +38,22 @@
                 componentAttributes,
                 function(recordView, status, errorMessage) {
                     if (status === "SUCCESS") {
-                        var body = component.get("v.body");
+                        let body = component.get("v.body");
                         body.push(recordView);
                         component.set("v.body", body);
                     } else if (status === "INCOMPLETE") {
-                        console.log("No response from server or client is offline.")
+                        this.handleErrors(null, "No response from server or client is offline.");
                     } else if (status === "ERROR") {
-                        console.log("Error: " + errorMessage);
+                        this.handleErrors(null, errorMessage);
                     }
                 }
             );
     },
-    handleErrors : function(errors) {
+    handleErrors : function(errors, errorMessage) {
         // Configure error toast
         let toastParams = {
             title: "Error",
-            message: "Unknown error",
+            message: errorMessage,
             type: "error"
         };
         // Pass the error message if any

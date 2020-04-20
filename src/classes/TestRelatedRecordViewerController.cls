@@ -21,7 +21,7 @@ private class TestRelatedRecordViewerController {
         Test.startTest();
         String expectedAcctId = RelatedRecordViewerController.getRelatedRecordId(con.Id, 'AccountId');
         Test.stopTest();
-        System.assertEquals(acctId, expectedAcctId, 'Confirm the related record Id');
+        System.assertEquals(expectedAcctId, acctId, 'Confirm the related record Id');
     }
     
     @IsTest
@@ -37,7 +37,7 @@ private class TestRelatedRecordViewerController {
             exceptionMsg = e.getMessage();
         }
         Test.stopTest(); 
-        System.assertEquals(exceptionMsg, expectedExceptionMsg, 'Confirm the exception message');
+        System.assertEquals(expectedExceptionMsg, exceptionMsg, 'Confirm the exception message');
     }
 
 }
