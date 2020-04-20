@@ -1,0 +1,12 @@
+<design:component>
+	<design:attribute 
+    	name="fieldApiName"
+        label="Related Record Field API Name"
+        description="The API Name of the related record."
+        required="true" />
+    <design:attribute 
+    	name="invalidRelatedRecordMsg"
+        label="Invalid Related Record Message"
+        description="Invalid related record message." 
+        required="false" />
+</design:component>

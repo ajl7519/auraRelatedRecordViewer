@@ -1,0 +1,11 @@
+<aura:component controller="RelatedRecordViewerController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<aura:attribute name="fieldApiName" type="String" description="Related record field API name." />
+    <aura:attribute 
+    	name="invalidRelatedRecordMsg"
+        type="String"
+        default="Invalid related record."
+        description="Invalid related record message." />
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    <aura:handler event="force:refreshView" action="{!c.init}" />
+    {!v.body}
+</aura:component>
