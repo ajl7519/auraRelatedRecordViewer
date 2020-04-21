@@ -26,13 +26,13 @@ private class TestRelatedRecordViewerController {
     
     @IsTest
     private static void getRelatedRecordIdInvalidFieldApiName() {
-        Contact con = [SELECT Id, AccountId FROM Contact LIMIT 1];
-        String acctId = con.AccountId;
+        Contact con = [SELECT Id FROM Contact LIMIT 1];
+        String invalidFieldApiName = 'InvalidFieldApiName';
         String exceptionMsg;
-        String expectedExceptionMsg = RelatedRecordViewerController.invalidFieldMessage('InvalidFieldApiName', 'Contact');
+        String expectedExceptionMsg = RelatedRecordViewerController.invalidFieldMessage(invalidFieldApiName, 'Contact');
         Test.startTest();
         try {
-            RelatedRecordViewerController.getRelatedRecordId(con.Id, 'InvalidFieldApiName');
+            RelatedRecordViewerController.getRelatedRecordId(con.Id, invalidFieldApiName);
         } catch (Exception e) {
             exceptionMsg = e.getMessage();
         }
